@@ -1,0 +1,57 @@
+<mat-card style="width: 320px">
+<mat-card-title>
+	Students
+</mat-card-title>
+<mat-card-content fxLayout="column" class="my-5">
+<mat-form-field>
+  <mat-label>Student</mat-label>
+  <mat-select>
+    <mat-option [value]="data.name" [course]="data.course" *ngFor="let data of students" (click)="getInfo(data.name,data.course,studentInfoDialog)">
+    	{{data.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Course</mat-label>
+  <input matInput #courseField disabled>
+</mat-form-field>
+
+<button *ngIf="isCourseSelected" mat-button mat-flat-button color="primary"
+ (click)="toggleStudentDialog(studentDialog,'open')">Add Student</button>
+
+</mat-card-content>
+</mat-card>
+
+<ng-template #studentDialog>
+	<h3 mat-dialog-title>Add Student</h3>
+	<div mat-dialog-content>	
+      <mat-form-field>
+      <mat-label>Enter Student Name</mat-label>
+      <input matInput #studentName>
+      </mat-form-field>
+      <div>	
+      	  <button mat-icon-button color="warn" (click)="toggleStudentDialog(courseDialog,'close')">
+             <mat-icon>cancel</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="addStudent(studentName)">
+             <mat-icon>check_circle</mat-icon>
+          </button>
+      </div>
+       
+	</div>
+</ng-template>
+
+<ng-template #studentInfoDialog>
+  <h3 mat-dialog-title>Student Info</h3>
+  <div mat-dialog-content>  
+     <p>Name : {{stuName}}</p>
+     <p>Course : {{stuCourse}}</p>
+     <div fxLayoutAlign="center center">  
+          <button mat-icon-button color="primary" [mat-dialog-close]="true">
+             <mat-icon>check_circle</mat-icon>
+          </button>
+      </div>
+  </div>
+</ng-template>
+

@@ -1,0 +1,38 @@
+<mat-card style="width: 320px">
+<mat-card-title>
+	Course
+</mat-card-title>
+<mat-card-content fxLayout="column" class="my-5">
+<mat-form-field>
+  <mat-label>Choose A Course</mat-label>
+  <mat-select #courseField>
+    <mat-option [value]="course" *ngFor="let course of courses" (click)="selectOption(course)">
+    	{{course}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<button (click)="toggleCourseDialog(courseDialog,'open')" mat-button mat-flat-button color="primary">Add New Course</button>
+
+</mat-card-content>
+</mat-card>
+
+<ng-template #courseDialog>
+	<h3 mat-dialog-title>Add Course Name</h3>
+	<div mat-dialog-content>	
+      <mat-form-field>
+      <mat-label>Enter Course Name</mat-label>
+      <input matInput #course>
+      </mat-form-field>
+      <div>	
+      	  <button mat-icon-button color="warn" (click)="toggleCourseDialog(courseDialog,'close')">
+             <mat-icon>cancel</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="addCourse(course)">
+             <mat-icon>check_circle</mat-icon>
+          </button>
+      </div>
+       
+	</div>
+</ng-template>
+
